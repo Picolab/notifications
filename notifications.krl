@@ -131,7 +131,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 		|                                              false
 
 
-      choose notify_level {
+      choose notify_level.klog(">> notify level >>") {
         sms         => twilio:send_sms(phone_num(), system_number(), "#{subject} (#{application}): #{description}");
         email       => sendgrid:send(name(), email_addr(), "#{application}: #{subject}", description);
         logonly     => noop();
