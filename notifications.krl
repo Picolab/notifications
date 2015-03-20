@@ -5,7 +5,7 @@ ruleset notifications {
 This app responds to notification events.  Unlike the Simple Notification Service (a16x128)
 on which it is modeled, this service is designed to work in the CloudOS.
 
-Copyright 2015 Pico Labs LC, All Rights Reserved
+Copyright 2015 Pico Labs LLC, All Rights Reserved
 >>
 
     author "Phil Windley"
@@ -246,7 +246,8 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 	 "subject": subject,
 	 "priority": priority,
 	 "description": description,
-	 "id": id
+	 "id": id,
+	 "disposition": "deliver"
 	};
     }
   }
@@ -268,7 +269,8 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 	   "subject": subject,
  	   "priority": priority,
   	   "description": description,
-	   "id": id
+	   "id": id,
+	   "disposition": "route_to_owner"
 	  };
       }
     }
