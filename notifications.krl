@@ -76,7 +76,8 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
     // --------------------------------------------
     ownerChannels = function() {
         all_ecis = CloudOS:channelList().klog(">>> my channels >>"); 
-        owners = all_ecis.pick("$.?(@.name like '/owner/i')").klog(">> owner channels >>");
+        owners = all_ecis{"channels"}.filter(function(chan){chan{"name"}.match(re/owner|fleet/i)})
+//pick("$.?(@.name like '/owner/i')").klog(">> owner channels >>");
 	owners
     };
 
