@@ -93,7 +93,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
 
     allItems = function(limit, offset) {
       sort_opt = {
-        "path" : ["endTime"],
+        "path" : ["timestamp"],
 	"reverse": true,
 	"compare" : "datetime"
       };
