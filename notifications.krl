@@ -118,6 +118,9 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
       sorted_keys.map(function(id){ ent:timeline{id} })
     };
 
+    rawTimeline = function() {
+      ent:timeline
+    };
 
     deliver_message = defaction(application, subject, priority, description, id) {
 
@@ -208,7 +211,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
         "subject": event:attr("subject").defaultsTo("Status Notification for #{app}"),
         "priority": event:attr("priority").defaultsTo(0),
         "description" : event:attr("description").defaultsTo("A status notification with priority #{priority} was received from #{app}"),
-        "id":  event:attr("id")
+        "id":  event:attr("id").defaultsTo(random:uuid())
       };
 
       local = not (email_addr().isnull() && phone_num().isnull());
@@ -288,7 +291,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
           "priority": event:attr("priority"),
           "description" : event:attr("description")
         };
-        id = event:attr("id");
+        id = event:attr("id").defaultsTo(random:uuid());
       }
       always {
         set ent:timeline{id} notify_attrs
