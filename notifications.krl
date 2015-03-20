@@ -211,7 +211,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
         "id":  event:attr("id")
       };
 
-      local = not (email_addr().isnull() && phone().isnull());
+      local = not (email_addr().isnull() && phone_num().isnull());
     }
 
     if(local) then {
