@@ -75,7 +75,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 
     // --------------------------------------------
     ownerChannels = function() {
-        all_subs = CloudOS:getAllSubscriptions().klog(">>> my subscriptions >>"); 
+        all_subs = CloudOS:getAllSubscriptions(); 
         owners = all_subs.values()
 	                 .filter(function(sub){sub{"relationship"}.match(re/owner|fleet/i)})
 	                 .map(function(sub){ sub{"eventChannel"} })
@@ -211,7 +211,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
         "id":  event:attr("id")
       };
 
-      local = not (name().isnull() && phone().isnull());
+      local = not (email_addr().isnull() && phone().isnull());
     }
 
     if(local) then {
