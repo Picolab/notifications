@@ -12,7 +12,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
     logging off
 
     sharing on
-    provides ownerChannels, timelineItems
+    provides ownerChannels, timelineItems, rawTimeline
 
     use module b16x24 alias pico_keys
                         
