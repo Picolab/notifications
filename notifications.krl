@@ -283,12 +283,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
     rule timeline_add_item {
       select when notification new_timeline_item
       pre {
-        notify_attrs = {
-          "application": event:attr("application"),
-          "subject": event:attr("subject"),
-          "priority": event:attr("priority"),
-          "description" : event:attr("description")
-        };
+        notify_attrs = event:attrs().put(["timestamp"], time:now() );
         id = event:attr("id").defaultsTo(random:uuid());
       }
       always {
