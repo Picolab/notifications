@@ -241,7 +241,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
 
     always {
       log "Delivered message " + {"subject": subject, "priority": priority, "id": id}.encode();
-      raise explicit event new_timeline_item attributes
+      raise notification event new_timeline_item attributes
         {"application": application,
 	 "subject": subject,
 	 "priority": priority,
@@ -264,7 +264,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
       }
       always {
         log "Routing to owner: " + {"subject": subject, "priority": priority, "id": id}.encode();
-        raise explicit event new_timeline_item attributes
+        raise notification event new_timeline_item attributes
           {"application": application,
 	   "subject": subject,
  	   "priority": priority,
