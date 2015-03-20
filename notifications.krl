@@ -133,9 +133,9 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
       		   |                     "nothing";
 
       // just for logging
-      bad_level = notify_level eq "sms" && phone().isnull() => true.klog(">> Notify level is SMS but no phone >>")
-                | notify_level eq "email" && email().isnull() => true.klog(">> Notify level is Email but no email >>")
-		|                                              false
+      bad_level = notify_level eq "sms"   && phone_num().isnull()  => true.klog(">> Notify level is SMS but no phone >>")
+                | notify_level eq "email" && email_addr().isnull() => true.klog(">> Notify level is Email but no email >>")
+		|                                                     false
 
 
       choose notify_level.klog(">> notify level >>") {
