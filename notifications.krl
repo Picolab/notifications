@@ -75,7 +75,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 
     // --------------------------------------------
     ownerChannels = function() {
-        all_ecis = CloudOS:channelList().klog(">>> my channels >>"); 
+        all_ecis = CloudOS:getAllSubscriptions().klog(">>> my subscriptions >>"); 
         owners = all_ecis{"channels"}.filter(function(chan){chan{"name"}.match(re/owner|fleet/i)})
 //pick("$.?(@.name like '/owner/i')").klog(">> owner channels >>");
 	owners
@@ -248,10 +248,10 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 
   rule route_to_owner {
     select when explicit for_owner
-    foreach ownerChannels() setting(owner_eci)
+    foreach ownerChannels() setting(owner)
       {
         send_directive("Routing to owner")
-          with channel = owner_eci 
+          with channel = owner{"cid"} 
            and attrs = event:attrs();
         event:send({"cid": owner_eci}, "notification", status)
           with attrs = event:attrs();
