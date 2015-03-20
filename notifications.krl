@@ -255,6 +255,9 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
   rule route_to_owner {
     select when explicit for_owner
     foreach ownerChannels() setting(owner_eci)
+      pre {
+        new_attrs = event:attrs().put(["disposition"], "route_to_owner")	  
+      }
       {
         send_directive("Routing to owner")
           with channel = owner_eci 
@@ -264,14 +267,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
       }
       always {
         log "Routing to owner: " + {"subject": subject, "priority": priority, "id": id}.encode();
-        raise notification event new_timeline_item attributes
-          {"application": application,
-	   "subject": subject,
- 	   "priority": priority,
-  	   "description": description,
-	   "id": id,
-	   "disposition": "route_to_owner"
-	  };
+        raise notification event new_timeline_item attributes new_attrs;
       }
     }
 
