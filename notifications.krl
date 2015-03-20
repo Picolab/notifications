@@ -255,7 +255,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
         send_directive("Routing to owner")
           with channel = owner_eci 
            and attrs = event:attrs();
-        event:send({"cid": owner_eci}, "notification", status)
+        event:send({"cid": owner_eci}, "notification", "status")
           with attrs = event:attrs();
       }
       always {
