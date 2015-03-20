@@ -21,7 +21,8 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
     use module a16x129 version "dev" alias sendgrid with
           api_user = keys:sendgrid("api_user") and 
           api_key = keys:sendgrid("api_key") and
-          application = "Pico Notification Service"
+          from = "noreply@joinfuse.com" and
+          fromname = "Fuse-NoReply"
                       
     use module a169x676 version "prod" alias pds
     use module a169x625 alias CloudOS
@@ -74,7 +75,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 
     // --------------------------------------------
     ownerChannels = function() {
-        all_ecis = CloudOS:channelList(); 
+        all_ecis = CloudOS:channelList().klog(">>> my channels >>"); 
         owners = all_ecis.pick("$.?(@.name like '/owner/i')").klog(">> owner channels >>");
 	owners
     };
@@ -127,7 +128,7 @@ Copyright 2015 Pico Labs LC, All Rights Reserved
 
       // just for logging
       bad_level = notify_level eq "sms" && phone().isnull() => true.klog(">> Notify level is SMS but no phone >>")
-                | notify_level eq "email" && email.isnull() => true.klog(">> Notify level is Email but no email >>")
+                | notify_level eq "email" && email().isnull() => true.klog(">> Notify level is Email but no email >>")
 		|                                              false
 
 
