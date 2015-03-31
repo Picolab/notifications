@@ -68,6 +68,10 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
     phone_num = function(){
       pds:get_me('myProfilePhone')
     };
+    notification_pref = function() {
+      // one of "info", "alert", or "emergency"
+      pds:get_me("notificationPreferences") || "alert"
+    };
 
     system_number = function() {
      "801-200-3415"
@@ -135,10 +139,20 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
       // just for logging
       bad_level = notify_level eq "sms"   && phone_num().isnull()  => true.klog(">> Notify level is SMS but no phone >>")
                 | notify_level eq "email" && email_addr().isnull() => true.klog(">> Notify level is Email but no email >>")
-		|                                                     false
+		|                                                     false;
 
+      atttenuate = function(nl) {
+        my_notification_level = notificationLevel();
+	new_level =  my_notification_level eq "emergency"
+	          && nl eq "sms"                           => nl
+	          |  my_notification_level eq "alert"
+		  && (nl eq "sms" || nl eq "email")        => nl
+		  |  my_notification_level eq "info"       => nl
+		  |                                           "logonly";
+        new_level
+      };
 
-      choose notify_level.klog(">> notify level >>") {
+      choose attenuate(notify_level.klog(">> original notify level >>")).klog(">> attenuated notify level >>") {
         sms         => twilio:send_sms(phone_num(), system_number(), "#{subject} (#{application}): #{description}");
         email       => sendgrid:send(name(), email_addr(), "#{application}: #{subject}", description);
         logonly     => noop();
