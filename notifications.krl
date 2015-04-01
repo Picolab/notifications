@@ -152,7 +152,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
         new_level
       };
 
-      choose attenuate(notify_level.klog(">> original notify level >>")).klog(">> attenuated notify level >>") {
+      choose attenuate(notify_level.klog(">> original notify level >>")).klog(">> attenuated notify level  >>") {
         sms         => twilio:send_sms(phone_num(), system_number(), "#{subject} (#{application}): #{description}");
         email       => sendgrid:send(name(), email_addr(), "#{application}: #{subject}", description);
         logonly     => noop();
