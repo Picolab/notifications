@@ -142,7 +142,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
 		|                                                     false;
 
       attenuate = function(nl) {
-        my_notification_level = notificationLevel();
+        my_notification_level = notification_pref();
 	new_level =  my_notification_level eq "emergency"
 	          && nl eq "sms"                           => nl
 	          |  my_notification_level eq "alert"
