@@ -141,7 +141,7 @@ Copyright 2015 Pico Labs LLC, All Rights Reserved
                 | notify_level eq "email" && email_addr().isnull() => true.klog(">> Notify level is Email but no email >>")
 		|                                                     false;
 
-      atttenuate = function(nl) {
+      attenuate = function(nl) {
         my_notification_level = notificationLevel();
 	new_level =  my_notification_level eq "emergency"
 	          && nl eq "sms"                           => nl
